@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9ecef;
+            font-family: 'Roboto', sans-serif;
+        }
+        .post-title {
+            color: #007bff; /* Attractive blue color */
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .post-date {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .card {
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff; /* White background for cards */
+        }
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+        .navbar {
+            margin-bottom: 20px;
+            background-color: #343a40; /* Dark navbar */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important; /* White text for navbar */
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #f8f9fa !important; /* Light text on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Simple Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/add"><i class="fas fa-plus"></i> Add New Post</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Blog Posts</h1>
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-md-4">
+                    <div class="card">
+                        {% if post.image_filename %}
+                            <img src="{{ url_for('static', filename='uploads/' + post.image_filename) }}" class="card-img-top" alt="Post Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="post-title">{{ post.title }}</h5>
+                            <small class="post-date">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                            <p class="card-text">{{ post.content[:100] }}...</p>
+                            <a href="/post/{{ post.id }}" class="btn btn-info"><i class="fas fa-eye"></i> Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
