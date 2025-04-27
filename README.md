@@ -59,3 +59,6 @@ In summary, the Flask Blog Project serves as an excellent starting point for any
 - Flask Documentation
 - Bootstrap Documentation
 - Font Awesome
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Samuelson777/Simple-Blog-Application/blob/main/LICENSE) file for details.
